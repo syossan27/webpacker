@@ -18,7 +18,7 @@ Webpackerには、`./bin/webpack`と`./bin/webpack-watcher`の2つのbinstubが�
 
 それらは両方とも標準のwebpack.js実行可能ファイルの周りの薄いラッパーで、適切な構成ファイルがロードされ、ベンダーのnode_moduleが確実に使用されるようにします。
 
-開発時には、`./bin/webpack-watcher`を`./bin/rails server`とは別のターミナルで実行して、変更を加えるときに`app/javascript/packs/*。js`ファイルをコンパイルする必要があります。
+開発時には、`./bin/webpack-watcher`を`./bin/rails server`とは別のターミナルで実行して、変更を加えるときに`app/javascript/packs/*.js`ファイルをコンパイルする必要があります。
 
 2つのプロセスを手動で別々に実行する必要がない場合は、[Foreman](http://ddollar.github.io/foreman/)を使用できます。
 
