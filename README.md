@@ -1,6 +1,6 @@
 # Webpacker
 
-Webpackerを使用すると、JavaScriptプリプロセッサとバンドラ [Webpack]（http://webpack.github.io） を使いやすくなります。
+Webpackerを使用すると、JavaScriptプリプロセッサとバンドラ [Webpack](http://webpack.github.io) を使いやすくなります。
 RailsでアプリケーションのようなJavaScriptを管理します。
 
 アセットパイプラインと共存するのは、WebpackをアプリのようなJavaScriptだけで使用し、画像、CSS、またはJavaScriptのスプリンクル（すべてがアプリ/アセットに存続する）ではないからです。
