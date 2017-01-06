@@ -26,7 +26,7 @@ Webpackerには、`./bin/webpack`と`./bin/webpack-watcher`の2つのbinstubが�
 
 Webpackerは、開発と生産のための設定ファイルのデフォルトセットを提供します。
 
-それらはすべて `config/webpack/*。js`の共有ポイントと同居しています。
+それらはすべて `config/webpack/*.js`の共有ポイントと同居しています。
 
 デフォルトでは、ボックスの基本的な設定を変更する必要はありません。
 
