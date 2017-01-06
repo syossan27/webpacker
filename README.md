@@ -1,42 +1,34 @@
 # Webpacker
 
-Webpacker makes it easy to use the JavaScript preprocessor and bundler [Webpack](http://webpack.github.io)
-to manage application-like JavaScript in Rails. It coexists with the asset pipeline,
-as the purpose is only to use Webpack for app-like JavaScript, not images, css, or
-even JavaScript Sprinkles (that all continues to live in app/assets).
+Webpackerを使用すると、JavaScriptプリプロセッサとバンドラ [Webpack]（http://webpack.github.io） を使いやすくなります。
+RailsでアプリケーションのようなJavaScriptを管理します。
 
-It's designed to work with Rails 5.1+ and makes use of the Yarn dependency management
-that's been made default from that version forward.
-It's also currently compatible with Rails 5.0 stable but there's absolutely no warranty
-it will still be in the future.
-You can either make use of Webpacker during setup of a new application with `--webpack`
-or you can add the gem and run `bin/rails webpacker:install` in an existing application.
+アセットパイプラインと共存するのは、WebpackをアプリのようなJavaScriptだけで使用し、画像、CSS、またはJavaScriptのスプリンクル（すべてがアプリ/アセットに存続する）ではないからです。
 
+これは、Rails5.1以上で動作するように設計されており、Yarnによる依存関係管理
+は5.1からデフォルトになっています。
+現在、Rails5.0の安定版と互換性がありますが、今後も保証はありません。
+`--webpack`で新しいアプリケーションをセットアップするときにWebpackerを使うか
+またはgemを追加して、既存のアプリケーションに `bin/rails webpacker：install`を実行することができます。
 
 ## Binstubs
 
-Webpacker ships with two binstubs: `./bin/webpack` and `./bin/webpack-watcher`. They're both thin wrappers
-around the standard webpack.js executable, just to ensure that the right configuration
-file is loaded and the node_modules from vendor are used.
+Webpackerには、`./bin/webpack`と`./bin/webpack-watcher`の2つのbinstubが付属しています。
+それらは両方とも標準のwebpack.js実行可能ファイルの周りの薄いラッパーで、適切な構成ファイルがロードされ、ベンダーのnode_moduleが確実に使用されるようにします。
 
-In development, you'll need to run `./bin/webpack-watcher` in a separate terminal from
-`./bin/rails server` to have your `app/javascript/packs/*.js` files compiled as you make changes.
-If you'd rather not have to run the two processes separately by hand, you can use
-[Foreman](http://ddollar.github.io/foreman/).
+開発時には、`./bin/webpack-watcher`を`./bin/rails server`とは別のターミナルで実行して、変更を加えるときに`app/javascript/packs/*。js`ファイルをコンパイルする必要があります。
+2つのプロセスを手動で別々に実行する必要がない場合は、[Foreman](http://ddollar.github.io/foreman/)を使用できます。
 
 
 ## Configuration
 
-Webpacker gives you a default set of configuration files for development and production. They
-all live together with the shared points in `config/webpack/*.js`. By default, you shouldn't have to
-make any changes for a basic setup out the box. But this is where you do go if you need something
-more advanced.
+Webpackerは、開発と生産のための設定ファイルのデフォルトセットを提供します。
+それらはすべて `config/webpack/*。js`の共有ポイントと同居しています。
+デフォルトでは、ボックスの基本的な設定を変更する必要はありません。
 
-The configuration for what Webpack is supposed to compile by default rests on the convention that
-every file in `app/javascript/packs/*` should be turned into their own output files (or entry points,
-as Webpack calls it).
+Webpackがデフォルトでコンパイルするはずの設定は、`app/javascript/packs/*`内のすべてのファイルを独自の出力ファイル（またはWebpackが呼び出すときのエントリポイント）に変換するという規則に基づいています。
 
-Let's say you're building a calendar. Your structure could look like this:
+カレンダーを作成すると、構造は次のようになります：
 
 ```erb
 <%# app/views/layout/application.html.erb %>
@@ -54,31 +46,29 @@ app/javascript/calendar/components/grid.jsx
 app/javascript/calendar/models/month.js
 ```
 
-But it could also look a million other ways. The only convention that Webpacker enforces is the
-one where entry points are automatically configured by the files in `app/javascript/packs`.
-
+しかし、それは数多くの他の方法でも見ることが出来ます。
+Webpackerが強制する唯一の慣例は、エントリポイントが `app/javascript/packs`のファイルによって自動的に設定されるものです。
 
 ## Deployment
 
-To compile all the packs during deployment, you can use the `rails webpacker:compile` command. This
-will invoke the production configuration, which includes digesting. The `javascript_pack_tag` helper
-method will automatically insert the correct digest when run in production mode. Just like the asset
-pipeline does it.
+開発中にすべてのパックをコンパイルするには、`rails webpacker：compile`コマンドを使用できます。
+これにより、ダイジェストを含むプロダクション構成が呼び出されます。
+
+`javascript_pack_tag`ヘルパーメソッドは、プロダクションモードで実行されるときに、アセットパイプラインと同じように自動的に正しいダイジェストを挿入します。
 
 
 ## Ready for React
 
-To use Webpacker with React, just create a new app with `rails new myapp --webpack=react` (or run `rails webpacker:install:react` on a Rails 5.1 app already setup with webpack), and all the relevant dependencies
-will be added via yarn and changes to the configuration files made. Now you can create JSX files and
-have them properly compiled automatically.
-
+ReactでWebpackerを使用するには、`rails new myapp - webbpack = react`を使って新しいアプリケーションを作成してください（またはwebpackで既に設定されているRails5.1で`rails webpacker：install：react`を実行してください）。
+すべての関連する依存関係がyarnを介して追加され、設定ファイルが変更されます。
+これで、JSXファイルを作成し、自動的に適切にコンパイルすることができます。
 
 ## Work left to do
 
-- Make asset pipeline digests readable from webpack, so you can reference images etc
-- Consider chunking setup
-- Consider on-demand compiling with digests when digesting=true
-- I'm sure a ton of other shit
+- Webpackからアセットパイプラインのダイジェストを読みやすくして、画像などを参照できるようにする
+- チャンク設定を検討する
+- digesting = trueの場合、ダイジェストによるオンデマンドコンパイルを検討する
+- きっと他に多くのダメな部分がある
 
 ## License
 Webpacker is released under the [MIT License](http://www.opensource.org/licenses/MIT).
